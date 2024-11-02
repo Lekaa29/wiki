@@ -86,3 +86,5 @@ def scrape():
                 
 
     main()
+
+scrape()

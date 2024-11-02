@@ -1,8 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper Simulation</title>
+    <style>
+        #console {
+            width: 100%;
+            height: 500px;
+            overflow-y: scroll;
+            background-color: #333;
+            color: #0f0;
+            padding: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
 <body>
-
-<h1>Scrape</h1>
+    {% load static %}
+    <div id="console"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('scrapeBtn').addEventListener('click', async () => {
+                const consoleDiv = document.getElementById('console');
+                consoleDiv.innerHTML = ''; // Clear previous logs
+            
+                try {
+                    const response = await fetch('/scrape/');
+                    console.log(`Response Status: ${response.status}`); // Log the response status
+                    const data = await response.json();
+            
+                } catch (error) {
+                    consoleDiv.textContent = `Fetch error: ${error.message}`;
+                }
+            });
+            
+        });
+        
+    </script>
+    <button id="scrapeBtn">Scrape Data</button>
 
 </body>
 </html>
